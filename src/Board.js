@@ -173,7 +173,7 @@
       let len = this.get(0).length;
       let x = 0;
       let y = minorDiagonalColumnIndexAtFirstRow;
-      while (x < len && y > -len) {
+      while (x < len && y >= 0) {
         if (this.get(x)[y]) {
           count++;
         }
