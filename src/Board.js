@@ -136,8 +136,8 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-    console.log('hello world: ', majorDiagonalColumnIndexAtFirstRow);
       let count = 0;
+      // console.log('hello world: ', majorDiagonalColumnIndexAtFirstRow);
       let len = this.get(0).length;
       let x = 0;
       let y = majorDiagonalColumnIndexAtFirstRow;
@@ -153,7 +153,8 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      for (var i = -3; i < this.get(0).length; i++) {
+      let lowest = -this.get(0).length;
+      for (var i = lowest; i < this.get(0).length; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }
@@ -168,29 +169,30 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      // let count = 0;
-      // let len = this.get(0).length;
-      // let x = 0;
-      // let y = minorDiagonalColumnIndexAtFirstRow;
-      // while (x > 0 && y > 0) {
-      //   if (this.get(x)[y]) {
-      //     count++;
-      //   }
-      //   x++;
-      //   y--;
-      // }
-      // return count > 1;
-      return false;
+      let count = 0;
+      let len = this.get(0).length;
+      let x = 0;
+      let y = minorDiagonalColumnIndexAtFirstRow;
+      while (x < len && y > -len) {
+        if (this.get(x)[y]) {
+          count++;
+        }
+        x++; 
+        y--;  
+      }
+      return count > 1;
+      // ask why -len works? 
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      // for (var i = 0; i < this.get(0).length; i++) {
-      //   if (this.hasMinorDiagonalConflictAt(i)) {
-      //     return true;
-      //   }
-      // }
-      return false; // fixme
+      let highest = this.get(0).length * 2;
+      for (var i = 0; i < highest; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
